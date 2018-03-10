@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>first test page</title>
+    <!-- the reference to the p5.js library at the CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+    <script>
+    var sprite;
+    var spritesize = 60;
+
+    //preload() function is called before loaded
+    //put resources here
+    function preload()
+    {
+      sprite = loadImage("dummy-min.png");
+    }
+
+    function setup()
+    {
+      createCanvas(600, 600);
+      frameRate(40);
+    }
+
+    function draw()
+    {
+      //console.log("draw() called");
+      image(sprite, (600-spritesize)/2, (600-spritesize)/2, spritesize, spritesize);
+    }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
