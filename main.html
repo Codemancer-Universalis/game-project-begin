@@ -4,15 +4,24 @@
     <!-- the reference to the p5.js library at the CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
     <script src="Leduc_engine.js"></script>
+    <script src="Leduc_renderer.js"></script>
     <script>
     var sprite;
     var spritesize = 60;
+    var dummyMob;
+    var dummyGraphic;
 
     //preload() function is called before loaded
     //put resources here
     function preload()
     {
-      sprite = loadImage("dummy-min.png");
+        sprite = loadImage("dummy2-min.png");
+        
+        //sprite array for rendering
+        var spriteArray = [sprite];
+        
+        dummyGraphic = new GraphicEntity(spriteArray, 30, 60);
+        dummyMob = new MobileEntity(300, 300, 30, 60);
     }
 
     function setup()
@@ -23,8 +32,9 @@
 
     function draw()
     {
-      //console.log("draw() called");
-      image(sprite, (600-spritesize)/2, (600-spritesize)/2, spritesize, spritesize);
+        //console.log("draw() called");
+        //image(sprite, (600-spritesize)/2, (600-spritesize)/2, spritesize, spritesize);
+        dummyGraphic.render(dummyMob);
     }
     </script>
   </head>
