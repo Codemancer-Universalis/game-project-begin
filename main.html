@@ -1,43 +1,113 @@
 <html>
-  <head>
-    <title>first test page</title>
-    <!-- the reference to the p5.js library at the CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
-    <script src="Leduc_engine.js"></script>
-    <script src="Leduc_renderer.js"></script>
-    <script>
-    var sprite;
-    var spritesize = 60;
-    var dummyMob;
-    var dummyGraphic;
+    <head>
+        <title>first test page</title>
+        <!-- the reference to the p5.js library at the CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
+        <script src="Leduc_engine.js"></script>
+        <script src="Leduc_renderer.js"></script>
+        <script>
+            var sprite;
+            var spritesize = 60;
+            var dummyMob;
+            var dummyGraphic;
+            
+            //current direction key that is active
+            var curkey = -1;
 
-    //preload() function is called before loaded
-    //put resources here
-    function preload()
-    {
-        sprite = loadImage("dummy2-min.png");
+            //preload() function is called before loaded
+            //put resources here
+            function preload()
+            {
+                sprite = loadImage("dummy2-min.png");
         
-        //sprite array for rendering
-        var spriteArray = [sprite];
+                //sprite array for rendering
+                var spriteArray = [sprite];
         
-        dummyGraphic = new GraphicEntity(spriteArray, 30, 60);
-        dummyMob = new MobileEntity(300, 300, 30, 60);
-    }
+                dummyGraphic = new GraphicEntity(spriteArray, 30, 60);
+                dummyMob = new MobileEntity(300, 300, 30, 60);
+            }
 
-    function setup()
-    {
-      createCanvas(600, 600);
-      frameRate(40);
-    }
+            function setup()
+            {
+                createCanvas(600, 600);
+                frameRate(40);
+                
+                //event listeners
+                window.addEventListener('keydown', keydown);
+                window.addEventListener('keyup', keyup);
+            }
 
-    function draw()
-    {
-        //console.log("draw() called");
-        //image(sprite, (600-spritesize)/2, (600-spritesize)/2, spritesize, spritesize);
-        dummyGraphic.render(dummyMob);
-    }
-    </script>
-  </head>
-  <body>
-  </body>
+            function draw()
+            {
+                //console.log("draw() called");
+                //image(sprite, (600-spritesize)/2, (600-spritesize)/2, spritesize, spritesize);
+                dummyMob.refresh();
+                dummyGraphic.render(dummyMob);
+            }
+            
+            //sets the direction that player is walking
+            function setDirection(dir)
+            {
+                directionReset();
+                
+                if(dir === 37)//left
+                {
+                    dummyMob.veloX = -2;
+                }
+                else if(dir === 38)//up
+                {
+                    dummyMob.veloY = -2;
+                }
+                else if(dir === 39)//right
+                {
+                    dummyMob.veloX = 2;
+                }
+                else if(dir === 40)//down
+                {
+                    dummyMob.veloY = 2;
+                }
+                else//reset
+                {
+                    directionReset();
+                }
+            }
+            
+            function directionReset()
+            {
+                dummyMob.veloX = 0;
+                dummyMob.veloY = 0;
+            }
+            
+            function keydown(e)
+            {
+                //get the key code
+                var code = e.keyCode ? e.keyCode : e.which;
+                
+                //if it is a direction key
+                if(code >= 37 && code <= 40)
+                {
+                    curkey = code;
+                    setDirection(curkey);
+                }
+            }
+            
+            function keyup(e)
+            {
+                //get the key code
+                var code = e.keyCode ? e.keyCode : e.which;
+                
+                console.log("keyup(): called");
+                
+                if(code === curkey)
+                {
+                    console.log("keyup(): code == curKey");
+                    
+                    curkey = -1;
+                    setDirection(curkey);
+                }
+            }
+        </script>
+    </head>
+    <body>
+    </body>
 </html>

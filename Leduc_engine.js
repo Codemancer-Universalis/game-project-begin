@@ -34,7 +34,7 @@ class MobileEntity
         this.airborne = false;
     }
     
-    referesh()
+    refresh()
     {
         this.posX += this.veloX;
         this.posY += this.veloY;
