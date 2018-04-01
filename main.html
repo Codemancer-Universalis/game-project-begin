@@ -19,10 +19,10 @@
             function preload()
             {
                 sprite = loadImage("dummy2-min.png");
-        
+
                 //sprite array for rendering
                 var spriteArray = [sprite];
-        
+
                 dummyGraphic = new GraphicEntity(spriteArray, 30, 60);
                 dummyMob = new MobileEntity(300, 300, 30, 60);
             }
@@ -31,7 +31,7 @@
             {
                 createCanvas(600, 600);
                 frameRate(40);
-                
+
                 //event listeners
                 window.addEventListener('keydown', keydown);
                 window.addEventListener('keyup', keyup);
@@ -41,15 +41,16 @@
             {
                 //console.log("draw() called");
                 //image(sprite, (600-spritesize)/2, (600-spritesize)/2, spritesize, spritesize);
+                background('grey');
                 dummyMob.refresh();
                 dummyGraphic.render(dummyMob);
             }
-            
+
             //sets the direction that player is walking
             function setDirection(dir)
             {
                 directionReset();
-                
+
                 if(dir === 37)//left
                 {
                     dummyMob.veloX = -2;
@@ -71,18 +72,18 @@
                     directionReset();
                 }
             }
-            
+
             function directionReset()
             {
                 dummyMob.veloX = 0;
                 dummyMob.veloY = 0;
             }
-            
+
             function keydown(e)
             {
                 //get the key code
                 var code = e.keyCode ? e.keyCode : e.which;
-                
+
                 //if it is a direction key
                 if(code >= 37 && code <= 40)
                 {
@@ -90,18 +91,18 @@
                     setDirection(curkey);
                 }
             }
-            
+
             function keyup(e)
             {
                 //get the key code
                 var code = e.keyCode ? e.keyCode : e.which;
-                
+
                 console.log("keyup(): called");
-                
+
                 if(code === curkey)
                 {
                     console.log("keyup(): code == curKey");
-                    
+
                     curkey = -1;
                     setDirection(curkey);
                 }
