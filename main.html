@@ -10,9 +10,28 @@
             var spritesize = 60;
             var dummyMob;
             var dummyGraphic;
-            
+
             //current direction key that is active
             var curkey = -1;
+
+            //tilemap of the game in an array
+            //each number represents different colour
+            var gameMap = [
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+              [0, 0, 0, 0, 0, 2, 0, 0, 0, 0,],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+              [0, 2, 0, 1, 2, 1, 2, 1, 0, 0,],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 3,],
+              [0, 0, 0, 0, 0, 0, 0, 0, 0, 3,],
+              [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,],
+              [1, 1, 1, 1, 1, 1, 1, 1, 1, 1,]
+            ]
+
+            //height and width of tiles
+            var tileH = 60;
+            var tileW = 60;
 
             //preload() function is called before loaded
             //put resources here
@@ -42,6 +61,29 @@
                 //console.log("draw() called");
                 //image(sprite, (600-spritesize)/2, (600-spritesize)/2, spritesize, spritesize);
                 background('grey');
+
+                //draws tilemap from 2d array
+                //can replace colours in switch as needed
+                for (var y = 0; y < gameMap.length; y++) {
+                  for (var x = 0; x < gameMap[y].length; x++) {
+                    switch (gameMap[y][x]) {
+                      case 0:
+                        fill('grey');
+                        break;
+                      case 1:
+                        fill('brown');
+                        break;
+                      case 2:
+                        fill('yellow');
+                        break;
+                      case 3:
+                        fill('green');
+                        break;
+                    }
+                    rect(x * tileW, y * tileH, tileW, tileH)
+                  }
+                }
+
                 dummyMob.refresh();
                 dummyGraphic.render(dummyMob);
             }
