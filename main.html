@@ -2,9 +2,9 @@
     <head>
         <title>first test page</title>
         <!-- the reference to the p5.js library at the CDN -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
-        <script src="Leduc_engine.js"></script>
-        <script src="Leduc_renderer.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script> //Gets the p5 library
+        <script src="Leduc_engine.js"></script> //Calls the functions within Leduc_engine
+        <script src="Leduc_renderer.js"></script> //Calls the functions within Leduc_renderer
         <script>
             var sprite;
             var spritesize = 60;
@@ -56,7 +56,7 @@
                 window.addEventListener('keyup', keyup);
             }
 
-            function draw()
+            function draw() //Draws the screen of the game
             {
                 //console.log("draw() called");
                 //image(sprite, (600-spritesize)/2, (600-spritesize)/2, spritesize, spritesize);
